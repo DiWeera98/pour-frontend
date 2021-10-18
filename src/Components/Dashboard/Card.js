@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Fab } from "@material-ui/core";
 import { Create, MenuBook } from "@material-ui/icons";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   cardContainer: {
@@ -77,6 +78,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Card(props) {
   const classes = useStyles();
+  const history = useHistory();
+
   return (
     <div class={classes.cardContainer}>
       <h2 className={classes.h2}>Journal Name</h2>
@@ -84,10 +87,20 @@ export default function Card(props) {
       <br />
       <h5 className={classes.h5}>Created at: 24/10/2021</h5>
       <p className={classes.p}>15 Entries</p>
-      <Fab className={classes.fab2} size="small" color="secondary">
+      <Fab
+        className={classes.fab2}
+        size="small"
+        color="secondary"
+        onClick={() => history.push("/read")}
+      >
         <MenuBook />
       </Fab>
-      <Fab className={classes.fab1} size="small" color="secondary">
+      <Fab
+        className={classes.fab1}
+        size="small"
+        color="secondary"
+        onClick={() => history.push("/entry")}
+      >
         <Create />
       </Fab>
     </div>

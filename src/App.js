@@ -6,6 +6,7 @@ import Aboutus from "./Containers/Aboutus";
 import Contactus from "./Containers/Contactus";
 import Dashboard from "./Containers/dashboard";
 import Read from "./Components/Read/Read";
+import Entry from "./Containers/Entry";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
           <Layout main={<Read />} />
         </Route>
         <Route exact path="/entry">
-          <Layout main={<></>} />
+          <Layout main={<Entry />} />
         </Route>
         <Redirect to="/" />
       </Switch>

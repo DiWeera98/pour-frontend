@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   },
   box: {
     width: "500px",
-    padding: "40px",
+    padding: "30px",
     position: "absolute",
     top: "15%",
     left: "33%",
@@ -60,7 +60,7 @@ export default function LoginCard() {
   return (
     <div className={classes.card}>
       <div className={classes.box}>
-        <h3 className={classes.h3}>Sign In</h3>
+        <h1 className={classes.h3}>Sign In</h1>
         <p className="text-muted"> Please enter your login and password!</p>
         <input
           className={classes.input}

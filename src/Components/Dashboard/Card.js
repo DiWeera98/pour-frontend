@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Fab } from "@material-ui/core";
-import { Create, MenuBook } from "@material-ui/icons";
+import { Dialog, Fab } from "@material-ui/core";
+import { Add, Delete, Edit, MenuBook } from "@material-ui/icons";
 import { useHistory } from "react-router";
+import { Modal } from "@material-ui/core";
+import EditCard from "./EditCard";
 
 const useStyles = makeStyles((theme) => ({
   cardContainer: {
@@ -37,17 +39,27 @@ const useStyles = makeStyles((theme) => ({
   fab1: {
     position: "absolute",
     bottom: theme.spacing(2),
-    right: theme.spacing(2),
+    right: theme.spacing(5),
   },
   fab2: {
     position: "absolute",
     bottom: theme.spacing(2),
-    right: theme.spacing(9),
+    right: theme.spacing(13),
+  },
+  fab3: {
+    position: "absolute",
+    bottom: theme.spacing(2),
+    left: theme.spacing(5),
+  },
+  fab4: {
+    position: "absolute",
+    bottom: theme.spacing(2),
+    left: theme.spacing(13),
   },
   h2: {
     lineHeight: "1",
     paddingBottom: ".5em",
-    margin: "1em 0 0.15em",
+    margin: "2em 0 0.15em",
     transition: "color .2s ease, border .2s ease",
   },
   hr: {
@@ -71,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "600",
     lineHeight: "1.8",
     margin: "0 0 1.25em",
-    transform: "translateY(-0.5em)",
+    transform: "translateY(-0.25em)",
     transition: "opacity .45s ease, transform .5s ease",
   },
 }));
@@ -80,29 +92,57 @@ export default function Card(props) {
   const classes = useStyles();
   const history = useHistory();
 
+  const [editOpen, setEditOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
+
   return (
-    <div class={classes.cardContainer}>
-      <h2 className={classes.h2}>Journal Name</h2>
-      <hr className={classes.hr} />
-      <br />
-      <h5 className={classes.h5}>Created at: 24/10/2021</h5>
-      <p className={classes.p}>15 Entries</p>
-      <Fab
-        className={classes.fab2}
-        size="small"
-        color="secondary"
-        onClick={() => history.push("/read")}
+    <>
+      <div class={classes.cardContainer}>
+        <h2 className={classes.h2}>Journal Name</h2>
+        <hr className={classes.hr} />
+        <br />
+        <h5 className={classes.h5}>Created at: 24/10/2021</h5>
+        <p className={classes.p}>15 Entries</p>
+        <Fab
+          className={classes.fab2}
+          size="small"
+          color="secondary"
+          onClick={() => setEditOpen(true)}
+        >
+          <Edit />
+        </Fab>
+        <Fab
+          className={classes.fab1}
+          size="small"
+          color="secondary"
+          onClick={() => history.push("/entry")}
+        >
+          <Delete />
+        </Fab>
+        <Fab
+          className={classes.fab3}
+          size="small"
+          color="secondary"
+          onClick={() => history.push("/entry")}
+        >
+          <Add />
+        </Fab>
+        <Fab
+          className={classes.fab4}
+          size="small"
+          color="secondary"
+          onClick={() => history.push("/read")}
+        >
+          <MenuBook />
+        </Fab>
+      </div>
+      <Dialog
+        fullWidth={"md"}
+        open={editOpen}
+        onClose={() => setEditOpen(false)}
       >
-        <MenuBook />
-      </Fab>
-      <Fab
-        className={classes.fab1}
-        size="small"
-        color="secondary"
-        onClick={() => history.push("/entry")}
-      >
-        <Create />
-      </Fab>
-    </div>
+        <EditCard />
+      </Dialog>
+    </>
   );
 }

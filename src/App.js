@@ -5,8 +5,11 @@ import Login from "./Containers/Login";
 import Aboutus from "./Containers/Aboutus";
 import Contactus from "./Containers/Contactus";
 import Dashboard from "./Containers/dashboard";
-import Read from "./Components/Read/Read";
 import Entry from "./Containers/Entry";
+import ReadJournal from "./Containers/ReadJournal";
+import CreateCard from "./Components/Dashboard/CreateCard";
+import DeleteCard from "./Components/Dashboard/DeleteCard";
+import EditCard from "./Components/Dashboard/EditCard";
 
 function App() {
   return (
@@ -25,10 +28,13 @@ function App() {
           <Layout main={<Dashboard />} />
         </Route>
         <Route exact path="/read">
-          <Layout main={<Read />} />
+          <Layout main={<ReadJournal />} />
         </Route>
         <Route exact path="/entry">
           <Layout main={<Entry />} />
+        </Route>
+        <Route exact path="/test">
+          <Layout main={<EditCard />} />
         </Route>
         <Redirect to="/" />
       </Switch>
